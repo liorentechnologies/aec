@@ -215,7 +215,7 @@ Contributions welcome! Priority areas:
 @software{aec_llm_guardrails_2025,
   author = {Park, Thomas},
   title = {AEC LLM Guardrails: Predictive Safety for Language Models},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/YOUR_USERNAME/aec-llm-guardrails}
 }
 ```
