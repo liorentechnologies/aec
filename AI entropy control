@@ -135,20 +135,118 @@
     <div class="panel p-4 advanced-panel">
       <h2 class="text-lg font-semibold mb-2"><i data-lucide="sliders-horizontal"></i> Weights & Thresholds</h2>
       <div class="grid grid-cols-2 gap-3">
-        <div><label for="thetaHi" class="text-xs">θ_hi</label><input id="thetaHi" type="range" min="0" max="1" step="0.01" value="0.70"></div>
-        <div><label for="thetaLo" class="text-xs">θ_lo</label><input id="thetaLo" type="range" min="0" max="1" step="0.01" value="0.55"></div>
-        <div><label for="lambda" class="text-xs">λ (EMA)</label><input id="lambda" type="range" min="0" max="1" step="0.01" value="0.80"></div>
-        <div><label for="thetaCrit" class="text-xs">θ_crit</label><input id="thetaCrit" type="range" min="0" max="1" step="0.01" value="0.85"></div>
-        <div><label for="wR" class="text-xs">w_R</label><input id="wR" type="range" min="0" max="1" step="0.01" value="0.30"></div>
-        <div><label for="wC" class="text-xs">w_C</label><input id="wC" type="range" min="0" max="1" step="0.01" value="0.20"></div>
-        <div><label for="wN" class="text-xs">w_N</label><input id="wN" type="range" min="0" max="1" step="0.01" value="0.20"></div>
-        <div><label for="wS" class="text-xs">w_S</label><input id="wS" type="range" min="0" max="1" step="0.01" value="0.15"></div>
-        <div><label for="wJ" class="text-xs">w_J</label><input id="wJ" type="range" min="0" max="1" step="0.01" value="0.10"></div>
-        <div><label for="wP" class="text-xs">w_P</label><input id="wP" type="range" min="0" max="1" step="0.01" value="0.05"></div>
-        <div><label for="wA" class="text-xs">w_A</label><input id="wA" type="range" min="0" max="1" step="0.01" value="0.60"></div>
-        <div><label for="wV" class="text-xs">w_V</label><input id="wV" type="range" min="0" max="1" step="0.01" value="0.25"></div>
-        <div><label for="wF" class="text-xs">w_F</label><input id="wF" type="range" min="0" max="1" step="0.01" value="0.15"></div>
-        <div><label for="wSE" class="text-xs">w_SE</label><input id="wSE" type="range" min="0" max="1" step="0.01" value="0.20"></div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="thetaHi" class="text-xs flex justify-between"><span>θ_hi (High)</span><span class="mono" id="thetaHiVal">70%</span></label>
+            <input id="thetaHi" type="range" min="0" max="1" step="0.01" value="0.70" class="w-full accent-red-500">
+            <div class="text-[10px] text-red-400 mt-0.5">Emergency brake threshold</div>
+          </div>
+          <div class="w-2 h-8 rounded" style="background: linear-gradient(to bottom, #ef4444 0%, #fee2e2 100%)"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="thetaLo" class="text-xs flex justify-between"><span>θ_lo (Low)</span><span class="mono" id="thetaLoVal">55%</span></label>
+            <input id="thetaLo" type="range" min="0" max="1" step="0.01" value="0.55" class="w-full accent-green-500">
+            <div class="text-[10px] text-green-400 mt-0.5">Safe resume threshold</div>
+          </div>
+          <div class="w-2 h-8 rounded" style="background: linear-gradient(to bottom, #22c55e 0%, #dcfce7 100%)"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="lambda" class="text-xs flex justify-between"><span>λ (EMA)</span><span class="mono" id="lambdaVal">80%</span></label>
+            <input id="lambda" type="range" min="0" max="1" step="0.01" value="0.80" class="w-full accent-blue-500">
+            <div class="text-[10px] text-blue-400 mt-0.5">Smoothing factor</div>
+          </div>
+          <div class="w-2 h-8 rounded" style="background: linear-gradient(to bottom, #3b82f6 0%, #dbeafe 100%)"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="thetaCrit" class="text-xs flex justify-between"><span>θ_crit (Critical)</span><span class="mono" id="thetaCritVal">85%</span></label>
+            <input id="thetaCrit" type="range" min="0" max="1" step="0.01" value="0.85" class="w-full accent-yellow-500">
+            <div class="text-[10px] text-yellow-400 mt-0.5">Critical anomaly level</div>
+          </div>
+          <div class="w-2 h-8 rounded" style="background: linear-gradient(to bottom, #eab308 0%, #fef9c3 100%)"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wR" class="text-xs flex justify-between"><span>w_R (Repetition)</span><span class="mono" id="wRVal">30%</span></label>
+            <input id="wR" type="range" min="0" max="1" step="0.01" value="0.30" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for repetitive content</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wC" class="text-xs flex justify-between"><span>w_C (Contradiction)</span><span class="mono" id="wCVal">20%</span></label>
+            <input id="wC" type="range" min="0" max="1" step="0.01" value="0.20" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for logical contradictions</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wN" class="text-xs flex justify-between"><span>w_N (Topic Drift)</span><span class="mono" id="wNVal">20%</span></label>
+            <input id="wN" type="range" min="0" max="1" step="0.01" value="0.20" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for topic deviation</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wS" class="text-xs flex justify-between"><span>w_S (Safety)</span><span class="mono" id="wSVal">15%</span></label>
+            <input id="wS" type="range" min="0" max="1" step="0.01" value="0.15" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for safety violations</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wJ" class="text-xs flex justify-between"><span>w_J (Injection)</span><span class="mono" id="wJVal">10%</span></label>
+            <input id="wJ" type="range" min="0" max="1" step="0.01" value="0.10" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for prompt injection</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wP" class="text-xs flex justify-between"><span>w_P (PII)</span><span class="mono" id="wPVal">5%</span></label>
+            <input id="wP" type="range" min="0" max="1" step="0.01" value="0.05" class="w-full accent-purple-500">
+            <div class="text-[10px] text-purple-400 mt-0.5">Weight for personal information</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-purple-500 to-purple-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wA" class="text-xs flex justify-between"><span>w_A (APS)</span><span class="mono" id="wAVal">60%</span></label>
+            <input id="wA" type="range" min="0" max="1" step="0.01" value="0.60" class="w-full accent-indigo-500">
+            <div class="text-[10px] text-indigo-400 mt-0.5">Weight for anomaly score</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-indigo-500 to-indigo-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wV" class="text-xs flex justify-between"><span>w_V (Velocity)</span><span class="mono" id="wVVal">25%</span></label>
+            <input id="wV" type="range" min="0" max="1" step="0.01" value="0.25" class="w-full accent-indigo-500">
+            <div class="text-[10px] text-indigo-400 mt-0.5">Weight for change velocity</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-indigo-500 to-indigo-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wF" class="text-xs flex justify-between"><span>w_F (Frequency)</span><span class="mono" id="wFVal">15%</span></label>
+            <input id="wF" type="range" min="0" max="1" step="0.01" value="0.15" class="w-full accent-indigo-500">
+            <div class="text-[10px] text-indigo-400 mt-0.5">Weight for generation frequency</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-indigo-500 to-indigo-100"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex-grow">
+            <label for="wSE" class="text-xs flex justify-between"><span>w_SE (Speculative)</span><span class="mono" id="wSEVal">20%</span></label>
+            <input id="wSE" type="range" min="0" max="1" step="0.01" value="0.20" class="w-full accent-indigo-500">
+            <div class="text-[10px] text-indigo-400 mt-0.5">Weight for speculative execution</div>
+          </div>
+          <div class="w-2 h-8 rounded bg-gradient-to-b from-indigo-500 to-indigo-100"></div>
+        </div>
 
       </div>
       <section class="panel mt-3 p-3" style="border:1px solid rgba(148,163,184,.2);border-radius:12px">
@@ -401,6 +499,17 @@ onmessage = async (e) => {
 
 <script>
 document.addEventListener('DOMContentLoaded', ()=>{
+  // Setup slider value displays
+  const sliders = ['thetaHi', 'thetaLo', 'lambda', 'thetaCrit', 'wR', 'wC', 'wN', 'wS', 'wJ', 'wP', 'wA', 'wV', 'wF', 'wSE'];
+  sliders.forEach(id => {
+    const slider = document.getElementById(id);
+    const valueDisplay = document.getElementById(id + 'Val');
+    if (slider && valueDisplay) {
+      const updateValue = () => valueDisplay.textContent = Math.round(slider.value * 100) + '%';
+      slider.addEventListener('input', updateValue);
+      updateValue();
+    }
+  });
   const $=id=>document.getElementById(id);
   lucide.createIcons();
 
